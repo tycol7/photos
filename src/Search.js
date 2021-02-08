@@ -74,7 +74,7 @@ function Search() {
             <form method="get" name="search" action="">
                 <Input ref={searchInput} type="search" name="q" placeholder="Search photos" value={text} onChange={handleOnChange} />
             </form>
-            {text !== "" && <span role="button" className="clear-icon" onClick={() => clearText()}><img src={Close} alt="close" /></span>}
+            {text && <span role="button" className="clear-icon" onClick={() => clearText()}><img src={Close} alt="close" /></span>}
         </SearchWrap>
     );
 }

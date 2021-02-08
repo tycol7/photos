@@ -16,7 +16,6 @@ const SearchWrap = styled.header`
     align-items: center;
 
     .search-icon, .clear-icon {
-        margin-left: 12px;
         height: 20px;
         width: 20px;
 
@@ -26,6 +25,10 @@ const SearchWrap = styled.header`
             max-width: 100%;
             max-height: 100%;
         }
+    }
+
+    .search-icon {
+        margin-left: 15px;
     }
 
     .clear-icon {
@@ -43,12 +46,14 @@ const SearchWrap = styled.header`
 
 const Input = styled.input`
     padding: 0.8em 0.4em;
-    font-size: 1.2em;
+    font-size: 1.0em;
+    font-weight: 600;
     width: 275px;
     -webkit-appearance: none;
     border: none;
     background: #0D0D0D;
     color: #eee;
+    margin-left: 5px;
 
     :focus {
         outline: none;

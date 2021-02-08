@@ -24,7 +24,8 @@ const LoadMore = styled.footer`
 
   button {
     padding: 15px;
-    font-size: 1.2em;
+    font-size: 1.0em;
+    font-weight: 600;
     background: #121D26;
     border: 2px #fff solid;
     border-radius: 30px;
@@ -64,7 +65,7 @@ function Gallery() {
         }
       } else {
         if (result.response.results === undefined || result.response.results.length === 0) {
-          setIsEmpty("Sorry, we couldn't find any images with that query")
+          setIsEmpty("Sorry, we couldn't find any images matching your query")
         }
         setPhotosResponse(result.response.results)
       }
@@ -77,13 +78,14 @@ function Gallery() {
         query: user_query, 
         order_by: "latest", 
         perPage: 10, 
-        page: pages
+        page: pages,
+        orientation: "landscape"
       })
       .then(result => {
         handlePagesChange(result);
       })
       .catch(() => {
-        console.log("something went wrong!");
+        setIsEmpty("Sorry, something went wrong!");
       });
     /* If no user query, load most recent images */
     } else {
@@ -96,9 +98,10 @@ function Gallery() {
         handlePagesChange(result);
       })
       .catch(() => {
-        console.log("something went wrong!");
+        setIsEmpty("Sorry, something went wrong!");
       });
     }
+  // eslint-disable-next-line
   }, [pages]);
 
   if (photos === null) {

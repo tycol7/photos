@@ -1,10 +1,10 @@
 import React, { useState, useRef } from 'react'
-import user_query from './Query'
+import query from './Query'
 import styled from 'styled-components'
 import SearchIcon from './search.svg'
 import Close from './close.svg'
 
-const SearchWrap = styled.header`
+const SearchWrap = styled.div`
     margin: 1em auto;
     text-align: center;
     width: 350px;
@@ -60,9 +60,24 @@ const Input = styled.input`
     }
 `;
 
+const FilterWrap = styled.div`
+    margin: 1em 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    button {
+        padding: 5px 10px;
+        margin: 0 5px;
+    }
+`;
+
 function Search() {
-    const [text, setText] = useState(user_query);
+    const [text, setText] = useState(query.user_query);
+    const [activeFilter, setActiveFilter] = useState(query.orientation || "");
     const searchInput = useRef();
+
+    const availFilters = [["", "All"], ["landscape", "Landscape"], ["portrait", "Portrait"], ["squarish", "Square"]]
 
     const handleOnChange = event => {
         setText(event.target.value)
@@ -74,13 +89,20 @@ function Search() {
     }
 
     return (
-        <SearchWrap>
-            <span className="search-icon"><img src={SearchIcon} alt="search" /></span>
-            <form method="get" name="search" action="">
-                <Input ref={searchInput} type="search" name="q" placeholder="Search photos" value={text} onChange={handleOnChange} />
-            </form>
-            {text && <span role="button" className="clear-icon" onClick={() => clearText()}><img src={Close} alt="close" /></span>}
-        </SearchWrap>
+        <form method="get" name="search" action="">
+            <SearchWrap>
+                <span className="search-icon"><img src={SearchIcon} alt="search" /></span>
+                    <Input ref={searchInput} type="search" name="q" placeholder="Search photos" value={text} onChange={handleOnChange} />
+                {text && <span role="button" className="clear-icon" onClick={() => clearText()}><img src={Close} alt="close" /></span>}
+            </SearchWrap>
+            {query.user_query &&
+                <FilterWrap>
+                    {availFilters.map(key =>
+                        <button className={key[0] === activeFilter ? 'active' : ''} key={key[0]} name="orientation" value={key[0]} onClick={() => setActiveFilter(key[0])}>{key[1]}</button>
+                    )}
+                </FilterWrap>
+            }
+        </form>
     );
 }
 

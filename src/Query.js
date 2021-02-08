@@ -1,5 +1,8 @@
 import qs from 'query-string'
 
-const user_query = qs.parse(window.location.search)["q"];
+const query = {
+    user_query: qs.parse(window.location.search)["q"],
+    orientation: qs.parse(window.location.search)["orientation"]
+}
 
-export default user_query;
+export default query

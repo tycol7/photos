@@ -22,7 +22,7 @@ const Modal = styled.dialog`
     }
 
     .modal-close {
-        position: absolute;
+        position: fixed;
         right: 10px;
         top: 10px;
         cursor: pointer;

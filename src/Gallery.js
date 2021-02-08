@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { createApi } from "unsplash-js"
-import user_query from "./Query"
+import query from "./Query"
 import Photo from "./Photo"
 import styled from "styled-components"
 import Loading from "./loading.svg"
@@ -72,14 +72,19 @@ function Gallery() {
     }
 
     /* Get photos based on user query */
-    if (user_query) {
+    if (query.user_query) {
+      let api_orient = query.orientation
+      if (!(api_orient === "portrait" || api_orient === "landscape" || api_orient === "squarish")) {
+        api_orient = null
+      }
+
       api.search
       .getPhotos({ 
-        query: user_query, 
+        query: query.user_query, 
         order_by: "latest", 
         perPage: 10, 
         page: pages,
-        orientation: "landscape"
+        orientation: api_orient
       })
       .then(result => {
         handlePagesChange(result);

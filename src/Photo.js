@@ -31,8 +31,20 @@ function Photo({ photo }){
     const [isOpen, setIsOpen] = useState(false);
 
     useImperativeHandle(ref, () => ({
-        open: () => setIsOpen(true),
-        close: () => setIsOpen(false)
+        open: () => { 
+            document.querySelector('body').style.overflow = "hidden"
+            document.ontouchmove = function (e) {
+                e.preventDefault()
+            }
+            setIsOpen(true)
+        },
+        close: () => {
+            document.querySelector('body').style.overflow = "initial"
+            document.ontouchmove = function (e) {
+                return true
+            }
+            setIsOpen(false)
+        }
     }));
 
     const handleEscape = useCallback(event => {
@@ -40,7 +52,9 @@ function Photo({ photo }){
     }, []);
 
     useEffect(() => {
-        if (isOpen) document.addEventListener('keydown', handleEscape, false);
+        if (isOpen) { 
+            document.addEventListener('keydown', handleEscape, false);
+        }
         return () => {
             document.removeEventListener('keydown', handleEscape, false);
         }

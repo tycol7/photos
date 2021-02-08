@@ -3,7 +3,31 @@ body {
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  -webkit-overflow-scrolling: touch;
   margin: 0;
   padding: 0;
   background-color: #121D26;
+}
+
+button {
+  font-size: 1.0em;
+  font-weight: 600;
+  background: #121D26;
+  border: 2px #fff solid;
+  border-radius: 30px;
+  color: #fff;
+}
+
+.active {
+  background: #fff;
+  color: #121D26;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+button:disabled {
+  cursor: default;
+  border: none;
 }

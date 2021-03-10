@@ -5,6 +5,7 @@ import Photo from "./Photo"
 import styled from "styled-components"
 import Loading from "./loading.svg"
 import Modal from "./Modal"
+import APIKey from "./APIKey"
 
 const GridContainer = styled.section`
   column-count: 3;
@@ -24,26 +25,11 @@ const LoadMore = styled.footer`
 
   button {
     padding: 15px;
-    font-size: 1.0em;
-    font-weight: 600;
-    background: #121D26;
-    border: 2px #fff solid;
-    border-radius: 30px;
-    color: #fff;
-
-    :hover {
-      cursor: pointer;
-    }
-
-    :disabled {
-      cursor: default;
-      border: none;
-    }
   }
 `;
 
 const api = createApi({
-  accessKey: "f093--Xg8iwK9fJfjSLylW0KDiXE5126_peLH4k3Vjo"
+  accessKey: APIKey
 });
 
 function Gallery() {
@@ -53,7 +39,8 @@ function Gallery() {
 
   useEffect(() => {
     
-    /* Gets more images and appends them to existing images
+    /* 
+     * Gets images and appends them to existing images (if any)
      * If there are no more images, disable the load more button
      */
     function handlePagesChange(result) {
@@ -74,6 +61,7 @@ function Gallery() {
     /* Get photos based on user query */
     if (query.user_query) {
       let api_orient = query.orientation
+      
       if (!(api_orient === "portrait" || api_orient === "landscape" || api_orient === "squarish")) {
         api_orient = null
       }

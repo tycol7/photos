@@ -30,8 +30,11 @@ function Photo({ photo }){
 
     const [isOpen, setIsOpen] = useState(false);
 
+    /*
+     * Disables background scroll while in full screen mode
+     */
     useImperativeHandle(ref, () => ({
-        open: () => { 
+        open: () => {
             document.querySelector('body').style.overflow = "hidden"
             document.ontouchmove = function (e) {
                 e.preventDefault()
@@ -47,12 +50,15 @@ function Photo({ photo }){
         }
     }));
 
+    /*
+     * Allows the user to press the Esc key to leave full screen
+     */
     const handleEscape = useCallback(event => {
         if (event.keyCode === 27) setIsOpen(false);
     }, []);
 
     useEffect(() => {
-        if (isOpen) { 
+        if (isOpen) {
             document.addEventListener('keydown', handleEscape, false);
         }
         return () => {
@@ -76,7 +82,7 @@ function Photo({ photo }){
             </span>
             <Img src={urls.full} loader={LoadingAnimation} alt={alt_description} />
             <div className="modal-caption">
-               by @<a href={user.links.html} target="_blank" rel="noreferrer">{user.username}</a>
+               by <img style={{display: "inline"}} src={user.profile_image.small} alt="profile pic" /> {user.name} @<a href={user.links.html} target="_blank" rel="noreferrer">{user.username}</a>
             </div>
             </Modal> : null, document.body
         )}

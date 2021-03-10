@@ -52,6 +52,7 @@ const Modal = styled.dialog`
     .modal-caption {
         color: #fff;
         z-index: 3;
+        font-size: 1.0em;
         position: absolute;
         bottom: 0px;
         width: 50%;

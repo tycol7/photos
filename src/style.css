@@ -31,3 +31,7 @@ button:disabled {
   cursor: default;
   border: none;
 }
+
+button:focus {
+  outline: 0;
+}

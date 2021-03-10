@@ -79,10 +79,16 @@ function Search() {
 
     const availFilters = [["", "All"], ["landscape", "Landscape"], ["portrait", "Portrait"], ["squarish", "Square"]]
 
+    /*
+     * Keeps track of what's in the search bar
+     */
     const handleOnChange = event => {
         setText(event.target.value)
     }
 
+    /*
+     * Clear's the search bar and focuses on the search
+     */
     function clearText() {
         setText("")
         searchInput.current.focus();

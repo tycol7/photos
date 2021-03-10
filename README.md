@@ -1,4 +1,4 @@
-## React Photo App – [https://netlify.com](https://netlify.com)
+## React Photo App – [https://reactphotos.netlify.app](https://reactphotos.netlify.app)
 
 ![](website-preview.png)
 
